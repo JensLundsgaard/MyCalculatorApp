@@ -61,7 +61,11 @@ public class MainActivity extends AppCompatActivity {
         double input = Double.parseDouble(inputString);
         int accuracy = Integer.parseInt(accuracyString);
         double output = TaylorMath.exp(input, accuracy);
+        /* Source: https://stackoverflow.com/questions/153724/how-to-round-a-number-to-n-decimal-places-in-java
+        *
+        */
         output = (double)Math.round(output * 100000d) / 100000d;
+
         String outputString = String.valueOf(output);
         text.setText(outputString);
     }
