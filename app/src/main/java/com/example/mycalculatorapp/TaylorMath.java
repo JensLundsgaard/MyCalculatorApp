@@ -30,7 +30,7 @@ public class TaylorMath {
         return sum;
     }
     public static double ln(double input, int accuracy){
-        if(input < 0.0){
+        if(input <= 0.0){
             return 0.0;
         } else if(input >= 2.0){
             return ln(input/2,accuracy) + 0.69314718056;
