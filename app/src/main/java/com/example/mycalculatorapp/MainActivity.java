@@ -2,8 +2,10 @@ package com.example.mycalculatorapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             accuracyString = "20";
         }
         double input = Double.parseDouble(inputString);
-        int accuracy = Integer.parseInt(accuracyString);
+        int accuracy = (int)Double.parseDouble(accuracyString);
         double output = 0.0;
         switch (view.getId()) {
             case R.id.button:
@@ -50,6 +52,13 @@ public class MainActivity extends AppCompatActivity {
         output = (double)Math.round(output * 100000d) / 100000d;
         String outputString = String.valueOf(output);
         text.setText(outputString);
+        // Source:https://stackoverflow.com/questions/1109022/how-to-close-hide-the-android-soft-keyboard-programmatically
+        // This code causes the keyboard to be closed if it is open.
+        View v = this.getCurrentFocus();
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
     public void showOutputBasic(View view){
         EditText editText1 = (EditText) findViewById(R.id.operand1);
@@ -83,5 +92,12 @@ public class MainActivity extends AppCompatActivity {
         }
         String outputString = String.valueOf(output);
         text.setText(outputString);
+        // Source: https://stackoverflow.com/questions/1109022/how-to-close-hide-the-android-soft-keyboard-programmatically
+        // This code causes the keyboard to be closed if it is open.
+        View v = this.getCurrentFocus();
+        if (v != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
